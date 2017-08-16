@@ -12,11 +12,11 @@ foreach vip $vips {
 if { [tmsh::get_name $vip] contains "BGP" }{
 if { [tmsh::get_field_value $vip "rules" rules] != 0 } {
 set addrule [concat $rules $rulename ]
-tmsh::modify /ltm virtual [tmsh::get_name $vip] rules "{ $addrule }" profiles add "{" /Common/stream { } jha_httpcompression { } "}"
+tmsh::modify /ltm virtual [tmsh::get_name $vip] rules "{ $addrule }" profiles add "{" /Common/stream { } /Common/httpcompression { } "}"
 lappend vips_in_play $vip
 }
 else {
-tmsh::modify /ltm virtual [tmsh::get_name $vip] rules { WS_TLS_banner_irule } profiles add "{" /Common/stream { } jha_httpcompression { } "}"
+tmsh::modify /ltm virtual [tmsh::get_name $vip] rules { WS_TLS_banner_irule } profiles add "{" /Common/stream { } /Common/httpcompression { } "}"
 lappend vips_in_play $vip
 }
 }
