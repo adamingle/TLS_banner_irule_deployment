@@ -17,12 +17,12 @@ if { [lsearch -exact $rules $rulename] == -1 } {
 continue
 }
 if { [llength $rules] < 2 } {
-tmsh::modify /ltm virtual [tmsh::get_name $vip] rules none profiles delete "{" /Common/stream { } jha_httpcompression { } "}"
+tmsh::modify /ltm virtual [tmsh::get_name $vip] rules none profiles delete "{" /Common/stream { } /Common/httpcompression { } "}"
 lappend vips_in_play $vip
 } else {
 set id [lsearch -exact $rules $rulename]
 set keepers [lreplace $rules $id $id]
-tmsh::modify /ltm virtual [tmsh::get_name $vip] rules "{ $keepers }" profiles delete "{" /Common/stream { } jha_httpcompression { } "}"
+tmsh::modify /ltm virtual [tmsh::get_name $vip] rules "{ $keepers }" profiles delete "{" /Common/stream { } /Common/httpcompression { } "}"
 lappend vips_in_play $vip
 }
 }
